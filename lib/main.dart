@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tmdb_demo/core/theme/app_themes.dart';
+import 'dependancy_container.dart' as di;
 
-void main() {
+void main() async {
+  await di.init();
   runApp(const Application());
 }
 
