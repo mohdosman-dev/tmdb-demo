@@ -29,30 +29,30 @@ class GenreList extends StatelessWidget {
               itemCount: state.genres.length,
               itemBuilder: (context, index) {
                 final genre = state.genres.elementAt(index);
-                return Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.all(24.0),
-                          child: const Text(
-                            '😂',
-                            style: TextStyle(fontSize: 22),
-                          ),
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(24.0),
+                        child: const Text(
+                          '😂',
+                          style: TextStyle(fontSize: 22),
                         ),
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        genre.name ?? 'N/A',
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            fontSize: 14, fontWeight: FontWeight.w600),
-                      )
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      genre.name ?? 'N/A',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+                    )
+                  ],
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 10),

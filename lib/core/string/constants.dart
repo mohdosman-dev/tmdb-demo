@@ -17,4 +17,10 @@ class ApiConstants {
 
   /// Get the list of upcoming movies on TMDb. This list updates daily.
   static const String UPCONING_MOVIES = "/movie/upcoming";
+
+  /// Get movie details from movie id
+  static const String MOVIE_DETAILS = "/movie/%1\$";
+
+  /// Get actors from the movie
+  static const String ACTORS = "/movie/%1\$/credits";
 }
