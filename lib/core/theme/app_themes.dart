@@ -53,8 +53,8 @@ final ThemeData appLightTheme = ThemeData(
       )),
   appBarTheme: const AppBarTheme(
     backgroundColor: kScaffoldBackroundColor,
-    elevation: 2,
-    centerTitle: true,
+    elevation: 0,
+    centerTitle: false,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.dark,
@@ -73,7 +73,7 @@ final ThemeData appLightTheme = ThemeData(
   iconTheme: const IconThemeData(color: kMainTextColor),
   primaryIconTheme: const IconThemeData(color: kMainTextColor),
   textSelectionTheme: const TextSelectionThemeData(cursorColor: kMainColor),
-  bottomAppBarTheme: const BottomAppBarTheme(color: kWhiteColor),
+  bottomAppBarTheme: const BottomAppBarTheme(color: kMainColor),
   colorScheme: const ColorScheme.light(primary: kMainColor)
       .copyWith(error: const Color(0xFFb11116)),
 );
@@ -131,7 +131,7 @@ final ThemeData appDarkTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: kScaffoldDarkBackroundColor,
     elevation: 0.0,
-    centerTitle: true,
+    centerTitle: false,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
@@ -150,6 +150,7 @@ final ThemeData appDarkTheme = ThemeData(
   iconTheme: const IconThemeData(color: Colors.white),
   primaryIconTheme: const IconThemeData(color: Colors.white),
   textSelectionTheme: const TextSelectionThemeData(cursorColor: kMainColor),
+  bottomAppBarTheme: const BottomAppBarTheme(color: kMainColor),
   colorScheme: const ColorScheme.dark(primary: kMainColor)
       .copyWith(error: const Color(0xFFb11116)),
 );

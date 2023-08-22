@@ -26,9 +26,7 @@ class GenreBloc extends Bloc<IGenreEvent, IGenreState> {
 
   IGenreState _mapArticleOrFailure(Either<List<Genre>, IFailure> either) {
     return either.fold(
-      (r) {
-        return LoadedGenreState(r);
-      },
+      (r) => LoadedGenreState(r),
       (l) => ErrorGenreState(l.message ?? 'Something went wrong'),
     );
   }

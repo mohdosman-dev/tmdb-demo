@@ -1,189 +1,128 @@
+// To parse this JSON data, do
+//
+//     final movie = movieFromMap(jsonString);
+
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+Movie movieFromMap(String str) => Movie.fromMap(json.decode(str));
+
+String movieToMap(Movie data) => json.encode(data.toMap());
 
 class Movie {
   final bool? adult;
   final String? backdropPath;
-  final List<int>? genreIds;
   final int? id;
+  final String? title;
   final String? originalLanguage;
   final String? originalTitle;
   final String? overview;
-  final double? popularity;
   final String? posterPath;
+  final String? mediaType;
+  final List<int>? genreIds;
+  final double? popularity;
   final DateTime? releaseDate;
-  final String? title;
   final bool? video;
   final double? voteAverage;
   final int? voteCount;
+  bool isFavorite;
+
   Movie({
     this.adult,
     this.backdropPath,
-    this.genreIds,
     this.id,
+    this.title,
     this.originalLanguage,
     this.originalTitle,
     this.overview,
-    this.popularity,
     this.posterPath,
+    this.mediaType,
+    this.genreIds,
+    this.popularity,
     this.releaseDate,
-    this.title,
     this.video,
     this.voteAverage,
     this.voteCount,
+    this.isFavorite = false,
   });
 
   Movie copyWith({
     bool? adult,
     String? backdropPath,
-    List<int>? genreIds,
     int? id,
+    String? title,
     String? originalLanguage,
     String? originalTitle,
     String? overview,
-    double? popularity,
     String? posterPath,
+    String? mediaType,
+    List<int>? genreIds,
+    double? popularity,
     DateTime? releaseDate,
-    String? title,
     bool? video,
     double? voteAverage,
     int? voteCount,
-  }) {
-    return Movie(
-      adult: adult ?? this.adult,
-      backdropPath: backdropPath ?? this.backdropPath,
-      genreIds: genreIds ?? this.genreIds,
-      id: id ?? this.id,
-      originalLanguage: originalLanguage ?? this.originalLanguage,
-      originalTitle: originalTitle ?? this.originalTitle,
-      overview: overview ?? this.overview,
-      popularity: popularity ?? this.popularity,
-      posterPath: posterPath ?? this.posterPath,
-      releaseDate: releaseDate ?? this.releaseDate,
-      title: title ?? this.title,
-      video: video ?? this.video,
-      voteAverage: voteAverage ?? this.voteAverage,
-      voteCount: voteCount ?? this.voteCount,
-    );
-  }
+    bool? isFavorite,
+  }) =>
+      Movie(
+        adult: adult ?? this.adult,
+        backdropPath: backdropPath ?? this.backdropPath,
+        id: id ?? this.id,
+        title: title ?? this.title,
+        originalLanguage: originalLanguage ?? this.originalLanguage,
+        originalTitle: originalTitle ?? this.originalTitle,
+        overview: overview ?? this.overview,
+        posterPath: posterPath ?? this.posterPath,
+        mediaType: mediaType ?? this.mediaType,
+        genreIds: genreIds ?? this.genreIds,
+        popularity: popularity ?? this.popularity,
+        releaseDate: releaseDate ?? this.releaseDate,
+        video: video ?? this.video,
+        voteAverage: voteAverage ?? this.voteAverage,
+        voteCount: voteCount ?? this.voteCount,
+        isFavorite: isFavorite ?? this.isFavorite,
+      );
 
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
+  factory Movie.fromMap(Map<String, dynamic> json) => Movie(
+        adult: json["adult"],
+        backdropPath: json["backdrop_path"],
+        id: json["id"],
+        title: json["title"],
+        originalLanguage: json["original_language"],
+        originalTitle: json["original_title"],
+        overview: json["overview"],
+        posterPath: json["poster_path"],
+        mediaType: json["media_type"],
+        genreIds: json["genre_ids"] == null
+            ? []
+            : List<int>.from(json["genre_ids"]!.map((x) => x)),
+        popularity: json["popularity"]?.toDouble(),
+        releaseDate: json["release_date"] == null
+            ? null
+            : DateTime.parse(json["release_date"]),
+        video: json["video"],
+        voteAverage: json["vote_average"]?.toDouble(),
+        voteCount: json["vote_count"],
+        isFavorite: false,
+      );
 
-    if (adult != null) {
-      result.addAll({'adult': adult});
-    }
-    if (backdropPath != null) {
-      result.addAll({'backdropPath': backdropPath});
-    }
-    if (genreIds != null) {
-      result.addAll({'genreIds': genreIds});
-    }
-    if (id != null) {
-      result.addAll({'id': id});
-    }
-    if (originalLanguage != null) {
-      result.addAll({'originalLanguage': originalLanguage});
-    }
-    if (originalTitle != null) {
-      result.addAll({'originalTitle': originalTitle});
-    }
-    if (overview != null) {
-      result.addAll({'overview': overview});
-    }
-    if (popularity != null) {
-      result.addAll({'popularity': popularity});
-    }
-    if (posterPath != null) {
-      result.addAll({'posterPath': posterPath});
-    }
-    if (releaseDate != null) {
-      result.addAll({'releaseDate': releaseDate!.millisecondsSinceEpoch});
-    }
-    if (title != null) {
-      result.addAll({'title': title});
-    }
-    if (video != null) {
-      result.addAll({'video': video});
-    }
-    if (voteAverage != null) {
-      result.addAll({'voteAverage': voteAverage});
-    }
-    if (voteCount != null) {
-      result.addAll({'voteCount': voteCount});
-    }
-
-    return result;
-  }
-
-  factory Movie.fromMap(Map<String, dynamic> map) {
-    return Movie(
-      adult: map['adult'],
-      backdropPath: map['backdropPath'],
-      genreIds: List<int>.from(map['genreIds']),
-      id: map['id']?.toInt(),
-      originalLanguage: map['originalLanguage'],
-      originalTitle: map['originalTitle'],
-      overview: map['overview'],
-      popularity: map['popularity']?.toDouble(),
-      posterPath: map['posterPath'],
-      releaseDate: map['releaseDate'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['releaseDate'])
-          : null,
-      title: map['title'],
-      video: map['video'],
-      voteAverage:
-          map['voteAverage'] != null ? map['voteAverage']?.toDouble() : 0.0,
-      voteCount: map['voteCount'] != null ? map['voteCount']?.toInt() : 0,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Movie.fromJson(String source) => Movie.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'Movie(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originalLanguage: $originalLanguage, originalTitle: $originalTitle, overview: $overview, popularity: $popularity, posterPath: $posterPath, releaseDate: $releaseDate, title: $title, video: $video, voteAverage: $voteAverage, voteCount: $voteCount)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Movie &&
-        other.adult == adult &&
-        other.backdropPath == backdropPath &&
-        listEquals(other.genreIds, genreIds) &&
-        other.id == id &&
-        other.originalLanguage == originalLanguage &&
-        other.originalTitle == originalTitle &&
-        other.overview == overview &&
-        other.popularity == popularity &&
-        other.posterPath == posterPath &&
-        other.releaseDate == releaseDate &&
-        other.title == title &&
-        other.video == video &&
-        other.voteAverage == voteAverage &&
-        other.voteCount == voteCount;
-  }
-
-  @override
-  int get hashCode {
-    return adult.hashCode ^
-        backdropPath.hashCode ^
-        genreIds.hashCode ^
-        id.hashCode ^
-        originalLanguage.hashCode ^
-        originalTitle.hashCode ^
-        overview.hashCode ^
-        popularity.hashCode ^
-        posterPath.hashCode ^
-        releaseDate.hashCode ^
-        title.hashCode ^
-        video.hashCode ^
-        voteAverage.hashCode ^
-        voteCount.hashCode;
-  }
+  Map<String, dynamic> toMap() => {
+        "adult": adult,
+        "backdrop_path": backdropPath,
+        "id": id,
+        "title": title,
+        "original_language": originalLanguage,
+        "original_title": originalTitle,
+        "overview": overview,
+        "poster_path": posterPath,
+        "media_type": mediaType,
+        "genre_ids":
+            genreIds == null ? [] : List<dynamic>.from(genreIds!.map((x) => x)),
+        "popularity": popularity,
+        "release_date":
+            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
+        "video": video,
+        "vote_average": voteAverage,
+        "vote_count": voteCount,
+        "is_favorite": isFavorite,
+      };
 }

@@ -8,11 +8,14 @@ import 'package:tmdb_demo/features/home/domain/repositories/i_home_repository.da
 import 'package:tmdb_demo/features/home/domain/usecases/get_genres_usecase.dart';
 import 'package:tmdb_demo/features/home/domain/usecases/get_trending_movie_usecase.dart';
 import 'package:tmdb_demo/features/home/domain/usecases/get_upcoming_movie_usecase.dart';
+import 'package:tmdb_demo/features/home/presentation/bloc/genre/genre_bloc.dart';
+import 'package:tmdb_demo/features/home/presentation/bloc/trending/trending_bloc.dart';
+import 'package:tmdb_demo/features/home/presentation/bloc/upcoming/upcoming_bloc.dart';
 
 final GetIt instance = GetIt.instance;
 
 Future<void> init() async {
-  //! Feature - Home
+  //! Feature - Home ----------------------------------------
 
   //* Datasource injections
   instance.registerLazySingleton<IHomeDatasource>(
@@ -29,6 +32,11 @@ Future<void> init() async {
       () => GetTrendingMoviesUsecase(instance()));
   instance.registerLazySingleton<GetUpcomingMoviesUsecase>(
       () => GetUpcomingMoviesUsecase(instance()));
+
+  //* BLoC injections
+  instance.registerLazySingleton<GenreBloc>(() => GenreBloc(instance()));
+  instance.registerLazySingleton<TrendingBloc>(() => TrendingBloc(instance()));
+  instance.registerLazySingleton<UpcomingBloc>(() => UpcomingBloc(instance()));
 
   //* Core
   instance.registerLazySingleton(() => DioHelper());

@@ -1,4 +1,6 @@
 // Interface to define datasource function
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:tmdb_demo/core/errors/failure.dart';
 import 'package:tmdb_demo/core/helpers/dio_helper.dart';
@@ -66,6 +68,7 @@ class RemoteHomeDatasourceImpl extends IHomeDatasource {
   @override
   Future<Either<List<Movie>, IFailure>> getUpcomingMovies(
       Map<String, dynamic> params) async {
+    log('Get Upcoming: $params');
     final response = await dio.request<List<Movie>>(
       url: ApiConstants.UPCONING_MOVIES,
       method: Method.get,
