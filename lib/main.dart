@@ -12,6 +12,8 @@ import 'package:tmdb_demo/features/home/presentation/bloc/trending/trending_even
 import 'package:tmdb_demo/features/home/presentation/bloc/upcoming/upcoming_bloc.dart';
 import 'package:tmdb_demo/features/home/presentation/bloc/upcoming/upcoming_event.dart';
 import 'package:tmdb_demo/features/main_view.dart';
+import 'package:tmdb_demo/features/search/presentation/bloc/search/search_bloc.dart';
+import 'package:tmdb_demo/features/search/presentation/bloc/search/search_event.dart';
 import 'dependancy_container.dart' as di;
 
 void main() async {
@@ -48,6 +50,12 @@ class Application extends StatelessWidget {
         BlocProvider<ActorsBloc>(
           create: (context) =>
               di.instance<ActorsBloc>()..add(const GetActorsEvent(-1)),
+        ),
+
+        //! --- Search ---
+        BlocProvider<SearchBloc>(
+          create: (context) =>
+              di.instance<SearchBloc>()..add(const GetSearchResultEvent("")),
         ),
       ],
       child: MaterialApp(
