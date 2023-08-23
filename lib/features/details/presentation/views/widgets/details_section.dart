@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tmdb_demo/core/common/widgets/custom_outlined_button.dart';
 import 'package:tmdb_demo/core/common/widgets/movie_widget.dart';
 import 'package:tmdb_demo/features/details/data/models/movie_details.dart';
 import 'package:tmdb_demo/features/details/presentation/bloc/details/details_bloc.dart';
@@ -40,6 +41,35 @@ class DetailsSection extends StatelessWidget {
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                children: [
+                  CustomOutlinedButton(
+                    icon: const Icon(Icons.play_circle),
+                    title: "Watch Trailer",
+                    onTap: () {},
+                  ),
+                  const SizedBox(width: 16),
+                  CustomOutlinedButton(
+                    icon: const Icon(Icons.list_alt),
+                    title: "Add To My Watchlist",
+                    onTap: () {},
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+              Text(
+                'Plot summary',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                details.overview ?? 'N/A',
+                style: Theme.of(context).textTheme.bodyLarge,
               )
             ],
           );

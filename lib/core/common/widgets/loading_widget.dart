@@ -4,10 +4,12 @@ import 'package:shimmer/shimmer.dart';
 class LoadingWidget extends StatelessWidget {
   final double width;
   final double height;
+  final Widget? child;
   const LoadingWidget({
     super.key,
     this.width = 100,
     this.height = 140,
+    this.child,
   });
 
   @override
@@ -23,12 +25,13 @@ class LoadingWidget extends StatelessWidget {
             child: Shimmer.fromColors(
               baseColor: Colors.grey,
               highlightColor: Colors.white,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.04),
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
-                ),
-              ),
+              child: child ??
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.04),
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    ),
+                  ),
             ),
           ),
           const SizedBox(height: 8),

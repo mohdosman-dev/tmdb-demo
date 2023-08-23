@@ -4,6 +4,7 @@ import 'package:tmdb_demo/features/details/presentation/bloc/actors/actors_bloc.
 import 'package:tmdb_demo/features/details/presentation/bloc/actors/actors_event.dart';
 import 'package:tmdb_demo/features/details/presentation/bloc/details/details_bloc.dart';
 import 'package:tmdb_demo/features/details/presentation/bloc/details/details_event.dart';
+import 'package:tmdb_demo/features/details/presentation/views/widgets/actors_grid.dart';
 import 'package:tmdb_demo/features/details/presentation/views/widgets/details_section.dart';
 import 'package:tmdb_demo/features/home/data/models/movie.dart';
 
@@ -37,6 +38,8 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Column(
           children: [
             DetailsSection(movie: widget.movie),
+            const SizedBox(height: 24),
+            const ActorsGrid(),
           ],
         ),
       ),
