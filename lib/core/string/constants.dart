@@ -23,4 +23,7 @@ class ApiConstants {
 
   /// Get actors from the movie
   static const String ACTORS = "/movie/%1\$/credits";
+
+  /// Search for a movie
+  static const String SEARCH = "/search/movie";
 }
